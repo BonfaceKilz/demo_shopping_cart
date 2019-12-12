@@ -1,0 +1,22 @@
+{
+    "name": "bonface/cart_demo",
+    "description": "Simple cart CRUD app",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BonfaceKilz",
+            "email": "bonfacemunyoki@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {
+        "vlucas/phpdotenv": "^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}

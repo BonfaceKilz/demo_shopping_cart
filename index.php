@@ -4,21 +4,23 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $cart = new Cart(new DBHandler());
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if(!empty($_POST["quantity"])) {
-        $product = $cart->get_item_by_code($_POST["quantity"], $_GET["code"]);
 
-        if($_GET["action"] == "add") {
-            Cart::add_item_to_cart($product, $_GET["code"]);
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
+    !empty($_POST["quantity"])) {
+    $product = $cart->get_item_by_code($_POST["quantity"], $_GET["code"]);
 
-        if($_GET["action"] == "remove") {
-            Cart::remove_item_from_cart($_GET["code"]);
-        }
+    if($_GET["action"] == "add") {
+        Cart::add_item_to_cart($product, $_GET["code"]);
+    }
+}
 
-        if($_GET["action"] == "clear_cart") {
-            Cart::clear_all_cart();
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if($_GET["action"] == "remove") {
+        Cart::remove_item_from_cart($_GET["code"]);
+    }
+
+    if($_GET["action"] == "clear_cart") {
+        Cart::clear_all_cart();
     }
 }
 ?>

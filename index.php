@@ -99,12 +99,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	        ?>
                     <div>
                         <form method="POST" action="index.php?action=add&code=<?php echo $all_products[$key]["code"]; ?>">
-                            <h3><?php echo $product_array[$key]["product_name"]; ?></h3>
-                            <div><?php echo $product_array[$key]["product_description"]; ?></div>
-                            <img alt="Product Description A" src="assets/img/<?php echo $product_array[$key]["image"]; ?>"/>
-                            <div class="price">KES <?php echo $product_array[$key]["price"]; ?></div>
-                            <input class="product-quantity" name="quantity" type="text" value="1" size="3" />
-                            <input class="submit" type="submit" value="Add to Cart"/>
+                            <h3><?php echo $all_products[$key]["product_name"]; ?></h3>
+                            <div><?php echo $all_products[$key]["product_description"]; ?></div>
+                            <img alt="Product Description" src="assets/img/<?php echo $all_products[$key]["image"]; ?>"/>
+                            <input name="quantity" type="number" value="1" size="3" />
+                            <input class="btn-sm btn btn-a" type="submit" value="Add to Cart (KES <?php echo $all_products[$key]["price"]; ?>)"/>
                         </form>
                     </div>
 

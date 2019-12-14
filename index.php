@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                      <tbody>
                          <tr>
                              <th>Name</th>
-                             <th>Code</th>
                              <th>Quantity</th>
                              <th>Unit Price</th>
                              <th>Price</th>
@@ -48,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                          <tr>
                              <td>Name</td>
-                             <tr>Code</tr>
                              <tr>Quantity</tr>
                              <tr>Unit Price</tr>
                              <tr>Total Price</tr>

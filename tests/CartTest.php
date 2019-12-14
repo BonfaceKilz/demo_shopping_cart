@@ -21,8 +21,8 @@ final class CartTest extends TestCase
              ->willReturn($mocked_data);
         $cart = new Cart($stub);
         echo "test";
-        echo $cart->get_item_by_code(1, "60iziBo0");
-        $this->assertEquals($cart->get_item_by_code(1, "60iziBo0"),
+        echo $cart->getItemByCode(1, "60iziBo0");
+        $this->assertEquals($cart->getItemByCode(1, "60iziBo0"),
                             array( "60iziBo0" => array(
                                 'name' => "Product A",
                                 'code' => "60iziBo0",

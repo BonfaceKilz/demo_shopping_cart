@@ -45,13 +45,20 @@ class Cart
         }
     }
 
-    public static function remove_items()
+    public static function remove_item_from_cart($code)
     {
-        return;
+        if(!empty($_SESSION["cart_item"])) {
+			foreach($_SESSION["cart_item"] as $key => $value) {
+                if($code == $key)
+                    unset($_SESSION["cart_item"][$key]);
+                if(empty($_SESSION["cart_item"]))
+                    unset($_SESSION["cart_item"]);
+			}
+		}
     }
 
-    public static function fetch_items()
+    public static function clear_all_cart()
     {
-        return;
+        unset($_SESSION["cart_item"]);
     }
 }

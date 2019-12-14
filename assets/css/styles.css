@@ -54,10 +54,12 @@ a.icon {
 }
 
 .grid-container {
+    align-content: space-between;
     padding: 2em;
     width: 80%;
     margin: auto auto;
     display: inline-grid;
+    grid-row-gap: 50px;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
 }

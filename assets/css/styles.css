@@ -12,6 +12,11 @@ body {
     font-family: 'Nunito Sans', sans-serif;
 }
 
+a i {
+    color: red;
+    text-decoration: none;
+}
+
 #catalog h3 {
     text-align: center;
 }

@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <td><?php echo $item["quantity"]; ?></td>
                                     <td><?php echo "KES " . $item["price"]; ?></td>
                                     <td><?php echo "KES " . $price; ?></td>
-                                    <td><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><img src="icon-delete.png" alt="Remove Item" /></a></td>
+                                    <td><a class="icon"  href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><i class="ico">ⓧ</i></a></td>
                                 </tr>
                                 <?php
 			        $total_quantity += $item["quantity"];

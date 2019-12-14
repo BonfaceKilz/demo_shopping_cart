@@ -34,14 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     </head>
     <body>
         <!-- Cart -->
-        <section>
-            <heading>Cart</heading>
-            <div class="cart">
+        <section id="cart">
+            <heading><h3 class="title">Cart</h3></heading>
+
+            <div>
                 <?php
                 if(isset($_SESSION["cart_item"])){
                     $total_quantity = 0;
                     $total_price = 0;
                 ?>
+                    <table>
                         <tbody>
                             <tr>
                                 <th colspan="2">Name</th>
@@ -67,10 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 			        $total_price += ($item["price"] * $item["quantity"]);
 		                }
 		                ?>
-
                                 <tr>
-                                    <td>Total Price: <?php echo "KES" . $total_price; ?></td>
+                                    <td colspan="2">Total Price: <?php echo "KES" . $total_price; ?></td>
+                                    <td colspan="2"><a href="checkout.php" class="btn-sm btn btn-b">Proceed to checkout</a></td>
                                     <td colspan="2"><a class="btn-sm btn btn-c" href="index.php?action=clear_cart">Clear Cart</a></td>
+                                </tr>
+                                <tr>
                                 </tr>
 
                         </tbody>
@@ -86,8 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </section>
 
         <!-- Catalog -->
-        <section>
-            <heading>Product Catalog</heading>
+        <section id="catalog">
+            <heading><h3 class ="title">Product Catalog</h3></heading>
             <div class="grid-container">
                 <?php
 	        $all_products = $db_handle->executeQuery("SELECT * FROM products ORDER BY id DESC");

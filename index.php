@@ -44,11 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 ?>
                         <tbody>
                             <tr>
-                                <th>Name</th>
+                                <th colspan="2">Name</th>
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Price</th>
-                                <th>Remove</th>
                             </tr>
 
                             <?php

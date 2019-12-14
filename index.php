@@ -2,7 +2,8 @@
 session_start();
 require_once __DIR__ . '/vendor/autoload.php';
 
-$cart = new Cart(new DBHandler());
+$db_handle = new DBHandler();
+$cart = new Cart($db_handle);
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
@@ -32,114 +33,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <title>Demo Shopping Cart</title>
     </head>
     <body>
-         <!-- Cart -->
-         <section>
-             <heading>Cart</heading>
-             <a id="btnEmpty" href="index.php?action=clear_cart">Clear Cart</a>
-         <div class="cart">
-             <?php
-             if(isset($_SESSION["cart_item"])){
-                 $total_quantity = 0;
-                 $total_price = 0;
-             ?>
-                 <table class="cart">
-                     <tbody>
-                         <tr>
-                             <th>Name</th>
-                             <th>Quantity</th>
-                             <th>Unit Price</th>
-                             <th>Price</th>
-                             <th>Remove</th>
-                         </tr>
+        <!-- Cart -->
+        <section>
+            <heading>Cart</heading>
+            <a id="btnEmpty" href="index.php?action=clear_cart">Clear Cart</a>
+            <div class="cart">
+                <?php
+                if(isset($_SESSION["cart_item"])){
+                    $total_quantity = 0;
+                    $total_price = 0;
+                ?>
+                    <table class="cart">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Price</th>
+                                <th>Remove</th>
+                            </tr>
 
-                         <?php
-                         foreach ($_SESSION["cart_item"] as $item){
-                             $price = $item["quantity"] * $item["price"];
-                         ?>
-                             <tr>
-                                 <td><img alt="<?php 'assets/img/' . $item['name'] ?>" src="<?php 'assets/img/' . $item['image'] ?>"/></td>
-                                 <td><?php echo $item["name"]; ?></td>
-                                 <td><?php echo $item["quantity"]; ?></td>
-                                 <td><?php echo "KES" . $item["price"]; ?></td>
-                                 <td><?php echo "KES" . $price; ?></td>
-                                 <td><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><img src="icon-delete.png" alt="Remove Item" /></a></td>
-                             </tr>
-                             <?php
-			     $total_quantity += $item["quantity"];
-			     $total_price += ($item["price"] * $item["quantity"]);
-		             }
-		             ?>
+                            <?php
+                            foreach ($_SESSION["cart_item"] as $item){
+                                $price = $item["quantity"] * $item["price"];
+                            ?>
+                                <tr>
+                                    <td><img alt="<?php 'assets/img/' . $item['name'] ?>" src="<?php 'assets/img/' . $item['image'] ?>"/></td>
+                                    <td><?php echo $item["name"]; ?></td>
+                                    <td><?php echo $item["quantity"]; ?></td>
+                                    <td><?php echo "KES" . $item["price"]; ?></td>
+                                    <td><?php echo "KES" . $price; ?></td>
+                                    <td><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><img src="icon-delete.png" alt="Remove Item" /></a></td>
+                                </tr>
+                                <?php
+			        $total_quantity += $item["quantity"];
+			        $total_price += ($item["price"] * $item["quantity"]);
+		                }
+		                ?>
 
-                             <tr>
-                                 <td>Total Price: <?php echo "KES" . $total_price; ?></td>
-                             </tr>
+                                <tr>
+                                    <td>Total Price: <?php echo "KES" . $total_price; ?></td>
+                                </tr>
 
-                     </tbody>
-                 </table>
-                         <?php
-                         } else {
-                         ?>
-                             <div>Empty Cart</div>
-                         <?php
-                         }
-                         ?>
-         </div>
-         </section>
+                        </tbody>
+                    </table>
+                            <?php
+                            } else {
+                            ?>
+                                <div>Empty Cart</div>
+                            <?php
+                            }
+                            ?>
+            </div>
+        </section>
 
         <!-- Catalog -->
         <section>
             <heading>Product Catalog</heading>
             <div class="grid-container">
-                <div class="item">
-                    <form method="POST" action="index.php?action=add&code=cKPCh9jT">
-                        <h3>product title</h3>
-                        <img alt="Product Description A" src=""/>
-                    <div class="price">KES 100</div>
-                    <input class="product-quantity" name="quantity" type="text" value="1" size="3" />
-                    <input class="submit" type="submit" value="Add to Cart"/>
-                    </form>
-                </div>
+                <?php
+	        $all_products = $db_handle->executeQuery("SELECT * FROM products ORDER BY id DESC");
+		foreach($all_products as $key => $value){
+	        ?>
+                    <div class="item">
+                        <form method="POST" action="index.php?action=add&code=<?php echo $all_products[$key]["code"]; ?>">
+                            <h3><?php echo $product_array[$key]["product_name"]; ?></h3>
+                            <div><?php echo $product_array[$key]["product_description"]; ?></div>
+                            <img alt="Product Description A" src="assets/img/<?php echo $product_array[$key]["image"]; ?>"/>
+                            <div class="price">KES <?php echo $product_array[$key]["price"]; ?></div>
+                            <input class="product-quantity" name="quantity" type="text" value="1" size="3" />
+                            <input class="submit" type="submit" value="Add to Cart"/>
+                        </form>
+                    </div>
 
-                <div class="item">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                        <h3>product title</h3>
-                        <img alt="Product Description" src=""/>
-                    <div class="price">KES 100</div>
-                    <input class="product-quantity" name="" type="text" value="1" size="3" />
-                    <input class="submit" type="submit" value="Add to Cart"/>
-                    </form>
-                </div>
-
-                <div class="item">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                        <h3>product title</h3>
-                        <img alt="Product Description" src=""/>
-                    <div class="price">KES 100</div>
-                    <input class="product-quantity" name="" type="text" value="1" size="3" />
-                    <input class="submit" type="submit" value="Add to Cart"/>
-                    </form>
-                </div>
-
-                <div class="item">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                        <h3>product title</h3>
-                        <img alt="Product Description" src=""/>
-                    <div class="price">KES 100</div>
-                    <input class="product-quantity" name="" type="text" value="1" size="3" />
-                    <input class="submit" type="submit" value="Add to Cart"/>
-                    </form>
-                </div>
-
-                <div class="item">
-                    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                        <h3>product title</h3>
-                        <img alt="Product Description" src=""/>
-                        <div class="price">KES 100</div>
-                        <input class="product-quantity" name="" type="text" value="1" size="3" />
-                        <input class="submit" type="submit" value="Add to Cart"/>
-                    </form>
-                </div>
-
+	        <?php
+		}
+	        ?>
             </div>
         </section>
     </body>

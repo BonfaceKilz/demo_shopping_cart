@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 $price = $item["quantity"] * $item["price"];
                             ?>
                                 <tr>
-                                    <td><img alt="<?php 'assets/img/' . $item['name'] ?>" src="<?php 'assets/img/' . $item['image'] ?>"/></td>
+                                    <td><img alt="<?php echo "assets/img/" . $item['name'] ?>" src="<?php echo "assets/img/" . $item["image"] ?>"/></td>
                                     <td><?php echo $item["name"]; ?></td>
                                     <td><?php echo $item["quantity"]; ?></td>
                                     <td><?php echo "KES" . $item["price"]; ?></td>

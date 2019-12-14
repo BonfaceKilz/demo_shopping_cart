@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     $total_quantity = 0;
                     $total_price = 0;
                 ?>
-                    <table class="cart">
                         <tbody>
                             <tr>
                                 <th>Name</th>
@@ -95,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	        $all_products = $db_handle->executeQuery("SELECT * FROM products ORDER BY id DESC");
 		foreach($all_products as $key => $value){
 	        ?>
-                    <div class="item">
+                    <div>
                         <form method="POST" action="index.php?action=add&code=<?php echo $all_products[$key]["code"]; ?>">
                             <h3><?php echo $product_array[$key]["product_name"]; ?></h3>
                             <div><?php echo $product_array[$key]["product_description"]; ?></div>

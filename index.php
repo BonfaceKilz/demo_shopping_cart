@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
          <section>
          <heading>Cart</heading>
          <div class="cart">
-             <form action="">
                  <table class="cart">
                      <tbody>
                          <tr>
@@ -56,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                          </tr>
                      </tbody>
                  </table>
-             </form>
          </div>
          </section>
 

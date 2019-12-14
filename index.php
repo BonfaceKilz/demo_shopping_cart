@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <?php
                             } else {
                             ?>
-                                <div>Empty Cart</div>
+                                <article>Your Cart is Empty :(</article>
                             <?php
                             }
                             ?>

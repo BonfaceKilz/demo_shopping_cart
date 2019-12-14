@@ -31,6 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <head>
         <meta charset="UTF-8"/>
         <title>Demo Shopping Cart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/assets/css/min.css">
+        <link rel="stylesheet" type="text/css" href="/assets/css/styles.css">
     </head>
     <body>
         <!-- Cart -->

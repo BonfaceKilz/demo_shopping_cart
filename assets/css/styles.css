@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+
+:root {
+    --primary-bg-color: #929D9E;
+    --secondary-bg-color: #7F8688;
+    --primary-btn-color: #F3E367;
+    --dark-font-color: #2c2e31;
+    --light-font-color: #fff;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+#catalog h3 {
+    text-align: center;
+}
+
+
+#cart {
+    background: url('../img/header-bg.jpg') no-repeat 50%;
+    width: 100%;
+    margin: 0;
+    color: var(--light-font-color);
+}
+
+#cart article {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#cart heading {
+    text-align: center;
+    margin: 10px;
+}
+
+#cart table {
+    width: 40%;
+    min-width: 25em;
+    margin: auto auto;
+}
+
+#cart td {
+    padding: 1em;
+}
+
+#cart img {
+    max-width: 100px;
+}
+
+.grid-container {
+    padding: 2em;
+    width: 80%;
+    margin: auto auto;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+}
+
+.grid-container .btn {
+    color: var(--light-font-color);
+}
+
+.grid-container img {
+    max-width: 200px;
+}
+
+.title {
+    text-transform:uppercase;
+    font-size: 1.6em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    line-height: 1.5em;
+}

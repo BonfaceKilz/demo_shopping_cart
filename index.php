@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <!-- Cart -->
         <section>
             <heading>Cart</heading>
-            <a id="btnEmpty" href="index.php?action=clear_cart">Clear Cart</a>
             <div class="cart">
                 <?php
                 if(isset($_SESSION["cart_item"])){
@@ -72,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                 <tr>
                                     <td>Total Price: <?php echo "KES" . $total_price; ?></td>
+                                    <td colspan="2"><a class="btn-sm btn btn-c" href="index.php?action=clear_cart">Clear Cart</a></td>
                                 </tr>
 
                         </tbody>

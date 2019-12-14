@@ -34,8 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <body>
          <!-- Cart -->
          <section>
-         <heading>Cart</heading>
+             <heading>Cart</heading>
+             <a id="btnEmpty" href="index.php?action=clear_cart">Clear Cart</a>
          <div class="cart">
+             <?php
+             if(isset($_SESSION["cart_item"])){
+                 $total_quantity = 0;
+                 $total_price = 0;
+             ?>
                  <table class="cart">
                      <tbody>
                          <tr>
@@ -46,15 +52,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                              <th>Remove</th>
                          </tr>
 
-                         <tr>
-                             <td>Name</td>
-                             <tr>Quantity</tr>
-                             <tr>Unit Price</tr>
-                             <tr>Total Price</tr>
-                             <tr>Remove Icon</tr>
-                         </tr>
+                         <?php
+                         foreach ($_SESSION["cart_item"] as $item){
+                             $price = $item["quantity"] * $item["price"];
+                         ?>
+                             <tr>
+                                 <td><img alt="<?php 'assets/img/' . $item['name'] ?>" src="<?php 'assets/img/' . $item['image'] ?>"/></td>
+                                 <td><?php echo $item["name"]; ?></td>
+                                 <td><?php echo $item["quantity"]; ?></td>
+                                 <td><?php echo "KES" . $item["price"]; ?></td>
+                                 <td><?php echo "KES" . $price; ?></td>
+                                 <td><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><img src="icon-delete.png" alt="Remove Item" /></a></td>
+                             </tr>
+                             <?php
+			     $total_quantity += $item["quantity"];
+			     $total_price += ($item["price"] * $item["quantity"]);
+		             }
+		             ?>
+
+                             <tr>
+                                 <td>Total Price: <?php echo "KES" . $total_price; ?></td>
+                             </tr>
+
                      </tbody>
                  </table>
+                         <?php
+                         } else {
+                         ?>
+                             <div>Empty Cart</div>
+                         <?php
+                         }
+                         ?>
          </div>
          </section>
 

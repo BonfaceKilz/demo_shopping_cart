@@ -6,22 +6,23 @@ $db_handle = new DBHandler();
 $cart = new Cart($db_handle);
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
-    !empty($_POST["quantity"])) {
-    $product = $cart->get_item_by_code($_POST["quantity"], $_GET["code"]);
+if ($_SERVER['REQUEST_METHOD'] == 'POST' 
+    && !empty($_POST["quantity"])
+) {
+    $product = $cart->getItemByCode($_POST["quantity"], $_GET["code"]);
 
-    if($_GET["action"] == "add") {
-        Cart::add_item_to_cart($product, $_GET["code"]);
+    if ($_GET["action"] == "add") {
+        Cart::addItemToCart($product, $_GET["code"]);
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if($_GET["action"] == "remove") {
-        Cart::remove_item_from_cart($_GET["code"]);
+    if ($_GET["action"] == "remove") {
+        Cart::removeItemFromCart($_GET["code"]);
     }
 
-    if($_GET["action"] == "clear_cart") {
-        Cart::clear_all_cart();
+    if ($_GET["action"] == "clear_cart") {
+        Cart::clearAllCart();
     }
 }
 ?>
@@ -42,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             <div>
                 <?php
-                if(isset($_SESSION["cart_item"])){
+                if (isset($_SESSION["cart_item"])) {
                     $total_quantity = 0;
                     $total_price = 0;
-                ?>
+                    ?>
                     <table>
                         <tbody>
                             <tr>
@@ -56,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             </tr>
 
                             <?php
-                            foreach ($_SESSION["cart_item"] as $item){
+                            foreach ($_SESSION["cart_item"] as $item) {
                                 $price = $item["quantity"] * $item["price"];
-                            ?>
+                                ?>
                                 <tr>
                                     <td><img alt="<?php echo "assets/img/" . $item['name'] ?>" src="<?php echo "assets/img/" . $item["image"] ?>"/></td>
                                     <td><?php echo $item["name"]; ?></td>
@@ -68,10 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <td><a class="icon"  href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><i class="ico">ⓧ</i></a></td>
                                 </tr>
                                 <?php
-			        $total_quantity += $item["quantity"];
-			        $total_price += ($item["price"] * $item["quantity"]);
-		                }
-		                ?>
+                                $total_quantity += $item["quantity"];
+                                $total_price += ($item["price"] * $item["quantity"]);
+                            }
+                            ?>
                                 <tr>
                                     <td colspan="2">Total Price: <?php echo "KES" . $total_price; ?></td>
                                     <td colspan="2"><a href="checkout.php" class="btn-sm btn btn-b">Proceed to checkout</a></td>
@@ -83,12 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </tbody>
                     </table>
                             <?php
-                            } else {
-                            ?>
+                } else {
+                    ?>
                                 <article>Your Cart is Empty :(</article>
                             <?php
-                            }
-                            ?>
+                }
+                ?>
             </div>
         </section>
 
@@ -97,9 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <heading><h3 class ="title">Product Catalog</h3></heading>
             <div class="grid-container">
                 <?php
-	        $all_products = $db_handle->executeQuery("SELECT * FROM products ORDER BY id DESC");
-		foreach($all_products as $key => $value){
-	        ?>
+                $all_products = $db_handle->executeQuery("SELECT * FROM products ORDER BY id DESC");
+                foreach ($all_products as $key => $value) {
+                    ?>
                     <div>
                         <form method="POST" action="index.php?action=add&code=<?php echo $all_products[$key]["code"]; ?>">
                             <h3><?php echo $all_products[$key]["product_name"]; ?></h3>
@@ -110,9 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </form>
                     </div>
 
-	        <?php
-		}
-	        ?>
+                       <?php
+                }
+                ?>
             </div>
         </section>
     </body>

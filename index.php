@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <td><img alt="<?php echo "assets/img/" . $item['name'] ?>" src="<?php echo "assets/img/" . $item["image"] ?>"/></td>
                                     <td><?php echo $item["name"]; ?></td>
                                     <td><?php echo $item["quantity"]; ?></td>
-                                    <td><?php echo "KES" . $item["price"]; ?></td>
-                                    <td><?php echo "KES" . $price; ?></td>
+                                    <td><?php echo "KES " . $item["price"]; ?></td>
+                                    <td><?php echo "KES " . $price; ?></td>
                                     <td><a href="index.php?action=remove&code=<?php echo $item["code"]; ?>"><img src="icon-delete.png" alt="Remove Item" /></a></td>
                                 </tr>
                                 <?php

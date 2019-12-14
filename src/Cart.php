@@ -1,14 +1,60 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
+/**
+ * PHP Version 7.2
+ *
+ * Cart: A demo PHP Cart display for HomeChow company
+ *
+ * Copyright (c) 2019 Bonface K. M.
+ * Distributed under the terms of the MIT License.
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @category  Demo
+ * @package   None
+ * @author    Bonface K. M. <bonfacemunyoki@gmail.com>
+ * @copyright 2019 Bonface K. M. <bonfacemunyoki@gmail.com>
+ * @license   http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @link      None
+ */
 
+
+
+/**
+ * Simple Cart Class:
+ *
+ * You can use this to get items from the db by their code
+ * and also to manage sessions
+ *
+ * @category  Demo
+ * @package   None
+ * @author    Bonface K. M. <bonfacemunyoki@gmail.com>
+ * @copyright 2019 Bonface K. M. <bonfacemunyoki@gmail.com>
+ * @license   Bonface K. M. <bonfacemunyoki@gmail.com>
+ * @link      None
+ */
 class Cart
 {
+
+    /**
+     * Inject class with a db handler.
+     *
+     * @param $db_handler The injected database handler
+     *                    used to execute queries
+     */
     public function __construct($db_handler)
     {
         $this->db_handler = $db_handler;
     }
 
-    public function get_item_by_code($quantity, $code)
+    /**
+     * Get an item from the db.
+     *
+     * @param int    $quantity The total number of items from the $_POST
+     *                         request
+     * @param string $code     The value of the code passed in the url
+     *
+     * @return array
+     */
+    public function getItemByCode($quantity, $code)
     {
         $product = $this->db_handler->executeQuery(
             "SELECT * FROM products where code = '" . $code . "'"
@@ -24,7 +70,15 @@ class Cart
         );
     }
 
-    public static function add_item_to_cart($product, $code)
+    /**
+     * Add Items to the global session
+     *
+     * @param array  $product The product and it's details
+     * @param string $code    The value of code passed in the url
+     *
+     * @return Null
+     */
+    public static function addItemToCart($product, $code)
     {
         if (!empty($_SESSION["cart_item"])) {
             if (in_array($code, array_keys($_SESSION["cart_item"]))) {
@@ -47,7 +101,14 @@ class Cart
         }
     }
 
-    public static function remove_item_from_cart($code)
+    /**
+     * Remove Items from the global session
+     *
+     * @param string $code The value of code passed in the url
+     *
+     * @return Null
+     */
+    public static function removeItemFromCart($code)
     {
         if (!empty($_SESSION["cart_item"])) {
             foreach ($_SESSION["cart_item"] as $key => $value) {
@@ -61,7 +122,12 @@ class Cart
         }
     }
 
-    public static function clear_all_cart()
+    /**
+     * Remove everything from the global session
+     *
+     * @return Null
+     */
+    public static function clearAllCart()
     {
         unset($_SESSION["cart_item"]);
     }

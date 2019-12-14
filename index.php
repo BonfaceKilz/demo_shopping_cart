@@ -1,3 +1,17 @@
+<?php
+session_start();
+require_once __DIR__ . '/vendor/autoload.php';
+
+$cart = new Cart(new DBHandler());
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(!empty($_POST["quantity"])) {
+        $product = $cart->get_item_by_code($_POST["quantity"], $_GET["code"]);
+        Cart::add_item_to_cart($product, $_GET["code"]);
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
